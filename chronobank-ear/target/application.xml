@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/application_8.xsd" version="8">
+  <application-name>ChronoBank</application-name>
+  <description>Enterprise Application Archive for the ChronoBank system</description>
+  <display-name>chronobank-ear</display-name>
+  <module>
+    <ejb>com.imeth.ChronoBank-chronobank-ejb-1.0.jar</ejb>
+  </module>
+  <module>
+    <web>
+      <web-uri>com.imeth.ChronoBank-chronobank-web-1.0.war</web-uri>
+      <context-root>/chronobank</context-root>
+    </web>
+  </module>
+  <library-directory>lib</library-directory>
+</application>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ejb-jar xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/ejb-jar_4_0.xsd"
+         version="4.0">
+    <display-name>ChronoBank EJB</display-name>
+    <enterprise-beans>
+        <!-- Timer Service Configuration -->
+        <session>
+            <ejb-name>ScheduledTransferService</ejb-name>
+            <ejb-class>com.imeth.chronobank.ejb.service.timer.ScheduledTransferService</ejb-class>
+            <session-type>Stateless</session-type>
+            <transaction-type>Container</transaction-type>
+        </session>
+        <session>
+            <ejb-name>InterestCalculationService</ejb-name>
+            <ejb-class>com.imeth.chronobank.ejb.service.timer.InterestCalculationService</ejb-class>
+            <session-type>Stateless</session-type>
+            <transaction-type>Container</transaction-type>
+        </session>
+        <session>
+            <ejb-name>DailyBalanceUpdateService</ejb-name>
+            <ejb-class>com.imeth.chronobank.ejb.service.timer.DailyBalanceUpdateService</ejb-class>
+            <session-type>Stateless</session-type>
+            <transaction-type>Container</transaction-type>
+        </session>
+        <session>
+            <ejb-name>ReportGenerationService</ejb-name>
+            <ejb-class>com.imeth.chronobank.ejb.service.timer.ReportGenerationService</ejb-class>
+            <session-type>Stateless</session-type>
+            <transaction-type>Container</transaction-type>
+        </session>
+    </enterprise-beans>
+    
+    <assembly-descriptor>
+        <!-- Security Roles -->
+        <security-role>
+            <role-name>ADMIN</role-name>
+        </security-role>
+        <security-role>
+            <role-name>MANAGER</role-name>
+        </security-role>
+        <security-role>
+            <role-name>CUSTOMER</role-name>
+        </security-role>
+        
+        <!-- Method Permissions -->
+        <method-permission>
+            <role-name>ADMIN</role-name>
+            <method>
+                <ejb-name>*</ejb-name>
+                <method-name>*</method-name>
+            </method>
+        </method-permission>
+        <method-permission>
+            <role-name>MANAGER</role-name>
+            <method>
+                <ejb-name>ReportGenerationService</ejb-name>
+                <method-name>generateReport</method-name>
+            </method>
+        </method-permission>
+        
+        <!-- Container Transactions -->
+        <container-transaction>
+            <method>
+                <ejb-name>*</ejb-name>
+                <method-name>*</method-name>
+            </method>
+            <trans-attribute>Required</trans-attribute>
+        </container-transaction>
+    </assembly-descriptor>
+</ejb-jar>
